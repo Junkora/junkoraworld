@@ -1,0 +1,999 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff6b35;
+    --secondary-color: #f7931e;
+    --dark-bg: #0a0a0a;
+    --darker-bg: #050505;
+    --light-text: #e0e0e0;
+    --dim-text: #888;
+    --accent-green: #00ff41;
+    --danger-red: #ff0040;
+    --warning-yellow: #ffaa00;
+    --border-color: #333;
+    --card-bg: rgba(20, 20, 20, 0.8);
+}
+
+body {
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 50%, #0f0a0a 100%);
+    color: var(--light-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Noise Overlay Effect */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px
+        );
+    pointer-events: none;
+    z-index: 1;
+    animation: noise 0.2s infinite;
+}
+
+@keyframes noise {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-1%, -1%); }
+    20% { transform: translate(1%, 1%); }
+    30% { transform: translate(-2%, 2%); }
+    40% { transform: translate(2%, -1%); }
+    50% { transform: translate(-1%, 2%); }
+    60% { transform: translate(2%, 1%); }
+    70% { transform: translate(-2%, -2%); }
+    80% { transform: translate(1%, -2%); }
+    90% { transform: translate(-1%, 1%); }
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--border-color);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.logo-image {
+    height: 80px;
+    width: auto;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.games {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: clamp(560px, 85vh, 900px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 90px 20px 40px;
+    gap: clamp(8px, 2vw, 20px);
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+}
+
+.hero-content {
+    flex: 0 0 auto;
+    max-width: 420px;
+    z-index: 2;
+    position: relative;
+}
+
+.hero-title {
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.glitch {
+    position: relative;
+    color: var(--primary-color);
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 
+        2px 2px 0px rgba(0, 0, 0, 0.8),
+        -2px -2px 0px var(--danger-red),
+        2px -2px 0px var(--warning-yellow);
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        text-shadow: 
+            2px 2px 0px rgba(0, 0, 0, 0.8),
+            -2px -2px 0px var(--danger-red),
+            2px -2px 0px var(--warning-yellow);
+    }
+    25% {
+        text-shadow: 
+            -2px 2px 0px rgba(0, 0, 0, 0.8),
+            2px 2px 0px var(--primary-color),
+            -2px -2px 0px var(--accent-green);
+    }
+    50% {
+        text-shadow: 
+            2px -2px 0px rgba(0, 0, 0, 0.8),
+            -2px 2px 0px var(--secondary-color),
+            2px 2px 0px var(--danger-red);
+    }
+    75% {
+        text-shadow: 
+            -2px -2px 0px rgba(0, 0, 0, 0.8),
+            2px -2px 0px var(--warning-yellow),
+            -2px 2px 0px var(--primary-color);
+    }
+}
+
+.subtitle {
+    display: block;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--secondary-color);
+    margin-top: 0.5rem;
+    letter-spacing: 3px;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: var(--dim-text);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--light-text);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.pixel-landscape {
+    width: 400px;
+    height: 300px;
+    background: var(--dark-bg) url('images/mask.png') center center / contain no-repeat;
+    position: relative;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-landscape::before {
+    content: none;
+}
+
+.hero-image {
+    width: clamp(220px, 40vw, 420px);
+    height: auto;
+    display: block;
+    margin: 0;
+    border: none;
+}
+
+#network-container {
+    width: 100%;
+    height: 320px;
+    min-height: 280px;
+    position: relative;
+    background: var(--dark-bg);
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Games Section */
+.games-section {
+    padding: clamp(48px, 7vw, 64px) 20px;
+    background: var(--darker-bg);
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(16px, 3vw, 28px);
+}
+
+.game-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-bg);
+}
+
+.pixel-art {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.game-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.game1 {
+    background: linear-gradient(45deg, #2a1a1a, #3a2a2a);
+    position: relative;
+}
+
+.game1::after {
+    content: '⚠️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+}
+
+.game2 {
+    background: linear-gradient(45deg, #1a2a1a, #2a3a2a);
+}
+
+.game2::after {
+    content: '🛡️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+}
+
+.game3 {
+    background: linear-gradient(45deg, #2a2a1a, #3a3a2a);
+}
+
+.game3::after {
+    content: '🔍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+}
+
+.game-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.game-card p {
+    color: var(--dim-text);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-game {
+    background: linear-gradient(45deg, var(--accent-green), #00cc33);
+    color: var(--dark-bg);
+    border: none;
+}
+
+.btn-game:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+/* Tokenomics Section */
+.tokenomics-section {
+    padding: clamp(48px, 7vw, 64px) 20px;
+    background: var(--dark-bg);
+    position: relative;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tokenomics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.tokenomics-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.tokenomics-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.tokenomics-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.tokenomics-card p {
+    color: var(--dim-text);
+    line-height: 1.7;
+}
+
+.tokenomics-list {
+    margin: 0.5rem 0 0 1.25rem;
+    color: var(--dim-text);
+}
+
+.tokenomics-list li {
+    margin: 0.4rem 0;
+}
+
+.tokenomics-section a {
+    color: var(--accent-green);
+    text-decoration: underline;
+}
+
+/* Desktop layout: five tokenomics cards in a single row */
+@media (min-width: 1200px) {
+    .tokenomics-section .container {
+        /* widen just this section to comfortably fit 5 cards */
+        max-width: 1400px;
+    }
+    .tokenomics-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+    .tokenomics-card {
+        padding: 1.25rem;
+    }
+    .tokenomics-card h3 {
+        font-size: 0.95rem;
+    }
+    .tokenomics-card p,
+    .tokenomics-list {
+        font-size: 0.95rem;
+    }
+}
+
+/* Hero alignment tweak (bring text closer to image on wide screens) */
+@media (min-width: 769px) {
+    .hero {
+        justify-content: center;
+        gap: clamp(6px, 1.5vw, 16px); /* very tight gap between text and image */
+    }
+    .hero-content {
+        flex: 0 0 auto;               /* prevent flex growth to keep content narrow */
+        max-width: 360px;             /* compact text column to avoid wide style */
+    }
+}
+
+/* Tokenomics visual layout */
+.tokenomics-visual {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr);
+    gap: clamp(16px, 4vw, 40px);
+    align-items: center;
+    justify-items: center;
+    margin-top: 2rem;
+}
+
+.pie-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 1rem;
+}
+
+.pie-canvas {
+    width: clamp(260px, 32vw, 360px);
+    aspect-ratio: 1 / 1;
+    display: block;
+}
+
+.pie-legend {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--dim-text);
+    padding: 0;
+    margin: 0.25rem 0 0;
+}
+
+.pie-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pie-swatch {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+}
+
+.token-image-wrap {
+    text-align: center;
+}
+
+.token-image {
+    max-width: clamp(220px, 28vw, 340px);
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .tokenomics-visual {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .pie-legend {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+/* About Section */
+.about-section {
+    padding: clamp(48px, 7vw, 64px) 20px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 100%);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 4vw, 36px);
+    align-items: center;
+}
+
+.about-text h2 {
+    margin-bottom: 2rem;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    color: var(--dim-text);
+    line-height: 1.8;
+}
+
+.stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--dim-text);
+    letter-spacing: 1px;
+}
+
+.about-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixel-character {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, #3a2a2a, #4a3a3a);
+    border: 3px solid var(--border-color);
+    position: relative;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.pixel-character::after {
+    content: '🎮';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: clamp(48px, 7vw, 64px) 20px;
+    background: var(--darker-bg);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 4vw, 36px);
+}
+
+.contact-form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border: 2px solid var(--border-color);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 1rem;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    color: var(--light-text);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--dim-text);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-item h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+}
+
+.info-item p {
+    color: var(--dim-text);
+    font-size: 1.1rem;
+}
+
+.status-online {
+    color: var(--accent-green);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-bg);
+    border-top: 2px solid var(--border-color);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer p {
+    color: var(--dim-text);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--dark-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        border-top: 2px solid var(--border-color);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 20px 50px;
+    }
+    
+    .hero-visual {
+        margin-top: 2rem;
+    }
+    
+    .pixel-landscape {
+        width: 300px;
+        height: 200px;
+    }
+    
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .stats {
+        justify-content: center;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .games {
+        font-size: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 200px;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Selection Styling */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Gathering Phase Countdown */
+.countdown {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.countdown.ended {
+    color: var(--danger-red);
+}
+
+/* Game Features list */
+.game-features {
+    list-style: disc;
+    margin: 0 0 1rem 1.25rem;
+    text-align: left;
+    color: var(--dim-text);
+}
+
+.game-features li {
+    margin: 0.25rem 0;
+}
+
+/* SOON Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    padding: 1.25rem;
+    animation: modal-pop 200ms ease-out;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.modal-icon {
+    font-size: 1.5rem;
+}
+
+.modal-title {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+.modal-body {
+    color: var(--light-text);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@keyframes modal-pop {
+    from {
+        transform: translateY(8px) scale(0.98);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
